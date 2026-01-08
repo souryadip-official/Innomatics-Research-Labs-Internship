@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Regex Matcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Regex Matcher</h2>
+
+    <form method="post">
+        <label>Test String:</label><br>
+        <textarea name="string" rows="5">{{ string }}</textarea><br>
+
+        <label>Regular Expression:</label><br>
+        <textarea name="pattern" rows="2">{{ pattern }}</textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if results is not none %}
+        <h3 id="head" >Matches:</h3>
+        {% if results %}
+            <ol>
+            {% for match in results %}
+                <li>{{ match }}</li>
+            {% endfor %}
+            </ol>
+        {% else %}
+            <p>No matches found.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
