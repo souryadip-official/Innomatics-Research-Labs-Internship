@@ -1,17 +1,19 @@
 import streamlit as st
 import pickle
+import joblib
+from pathlib import Path
 import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+BASE_DIR = Path(__file__).parent
+
 @st.cache_resource
 def load_resources():
     # Loading the model and the vectorizer
-    with open('sentiment_model.pkl', 'rb') as f:
-        model = pickle.load(f)
-    with open('tfidf_vectorizer.pkl', 'rb') as f:
-        vectorizer = pickle.load(f)
+    model = joblib.load(BASE_DIR / "sentiment_model.pkl")
+    vectorizer = joblib.load(BASE_DIR / "tfidf_vectorizer.pkl")
         
     nltk.download('stopwords', quiet=True)
     nltk.download('wordnet', quiet=True)
